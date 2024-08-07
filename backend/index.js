@@ -23,11 +23,11 @@ app.use(cookieParser());
 app.use("/api", router);
 
 // Serve static files from the frontend build
-app.use(express.static(path.join(__dirname, "./frontend/dist")));
+app.use(express.static(path.join(__dirname, "frontend/dist")));
 
 // Handle all other routes by serving the React frontend
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./frontend/dist", "index.html"));
+    res.sendFile(path.join(__dirname, "frontend/dist", "index.html"));
 });
 
 // Start server
