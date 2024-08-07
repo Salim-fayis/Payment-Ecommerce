@@ -8,6 +8,8 @@ const path = require('path')
 
 
 
+
+
 const app = express();
 
 app.use(cors({
@@ -16,6 +18,7 @@ app.use(cors({
     
 }));
 
+console.log(__dirname);
 
 
 app.use(express.json({ limit: '10mb' }));
