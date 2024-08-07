@@ -1,24 +1,30 @@
-const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-require("dotenv").config();
-const connectDB = require("./config/db");
-const router = require("./routes");
-const path = require("path");
+const express = require('express');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+require('dotenv').config();
+const connectDB = require('./config/db');
+const router = require('./routes');
+const path = require('path')
+
+
 
 const app = express();
 
-app.use(
-  cors({
+app.use(cors({
     origin: process.env.FRONTEND_URL,
-    credentials: true,
-  })
-);
+      credentials: true,
+    
+}));
 
-app.use(express.json({ limit: "10mb" }));
+
+
+app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 
+
+
 app.use("/api", router);
+
 
 app.use(express.static(path.join(__dirname, "frontend", "dist")));
 
@@ -28,13 +34,11 @@ app.get("*", (req, res) => {
 
 const PORT = process.env.PORT || 8080;
 
-connectDB()
-  .then(() => {
+connectDB().then(() => {
     app.listen(PORT, () => {
-      console.log("Connected to DB");
-      console.log("Server is running on port " + PORT);
+        console.log("Connected to DB");
+        console.log("Server is running on port " + PORT);
     });
-  })
-  .catch((err) => {
+}).catch(err => {
     console.error("Failed to connect to DB", err);
-  });
+});
